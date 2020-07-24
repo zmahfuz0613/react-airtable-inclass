@@ -1,4 +1,5 @@
 import React from 'react'
+import UpdatePost from "./UpdatePost"
 
 function Post(props) {
   const post = props.post
@@ -6,6 +7,7 @@ function Post(props) {
     <h2>{post.fields.title}</h2>
     <h3>{post.fields.author} - {post.fields.created_at}</h3>
     <p>{post.fields.text}</p>
+    <UpdatePost post={post} />
   </div>
 }
 
