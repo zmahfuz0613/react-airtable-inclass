@@ -7,7 +7,7 @@ function Post(props) {
     <h2>{post.fields.title}</h2>
     <h3>{post.fields.author} - {post.fields.created_at}</h3>
     <p>{post.fields.text}</p>
-    <UpdatePost post={post} />
+    <UpdatePost post={post} fetchBlogPosts={props.fetchBlogPosts} updateFetchBlogPosts={props.updateFetchBlogPosts}/>
   </div>
 }
 

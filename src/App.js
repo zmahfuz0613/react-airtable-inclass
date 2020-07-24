@@ -27,7 +27,7 @@ function App() {
         updateFetchBlogPosts={updateFetchBlogPosts} 
         fetchBlogPosts={fetchBlogPosts}
       />
-      {blogPosts.map(post => <Post post={post} key={post.id} />)}
+      {blogPosts.map(post => <Post post={post} key={post.id} fetchBlogPosts={fetchBlogPosts} updateFetchBlogPosts={updateFetchBlogPosts}/>)}
     </main>
   );
 }
