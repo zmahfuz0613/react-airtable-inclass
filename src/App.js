@@ -5,6 +5,9 @@ import Post from "./Post"
 
 function App() {
   const [blogPosts, updateBlogPosts] = useState([])
+  const [author, updateAuthor] = useState('')
+  const [title, updateTitle] = useState('')
+  const [text, updateText] = useState('')
 
   useEffect(() => {
     const apiCall = async () => {
@@ -22,7 +25,17 @@ function App() {
     <main>
       <h1>My Blog</h1>
       {blogPosts.map(post => <Post post={post} key={post.id} />)}
-    </main>);
+      <h2>New Blog Post</h2>
+      <form>
+        <label htmlFor="author">Author</label>
+        <input type="text" id="author" onChange={e => updateAuthor(e.target.value)} />
+        <label htmlFor="title">Title</label>
+        <input type="text" id="title" onChange={e => updateTitle(e.target.value)}/>
+        <label htmlFor="text">Text</label>
+        <textarea name="" id="text" cols="30" rows="10" onChange={e => updateText(e.target.value)}></textarea>
+      </form>
+    </main>
+  );
 }
 
 export default App;
