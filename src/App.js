@@ -8,6 +8,7 @@ function App() {
   const [author, updateAuthor] = useState('')
   const [title, updateTitle] = useState('')
   const [text, updateText] = useState('')
+  const [fetchBlogPosts, updateFetchBlogPosts] = useState(false)
 
   useEffect(() => {
     const apiCall = async () => {
@@ -19,7 +20,7 @@ function App() {
       updateBlogPosts(posts.data.records)
     }
     apiCall()
-  }, [])
+  }, [fetchBlogPosts])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -35,7 +36,10 @@ function App() {
         'Content-Type': 'application/json'
       }
     })
-    console.log(data);
+    updateFetchBlogPosts(!fetchBlogPosts)
+    updateAuthor('')
+    updateText('')
+    updateTitle('')
   }
 
   return (
@@ -45,12 +49,12 @@ function App() {
       <h2>New Blog Post</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="author">Author</label>
-        <input type="text" id="author" onChange={e => updateAuthor(e.target.value)} />
+        <input type="text" id="author" onChange={e => updateAuthor(e.target.value)} value={author} />
         <label htmlFor="title">Title</label>
-        <input type="text" id="title" onChange={e => updateTitle(e.target.value)}/>
+        <input type="text" id="title" onChange={e => updateTitle(e.target.value)} value={title} />
         <label htmlFor="text">Text</label>
-        <textarea name="text" id="text" cols="30" rows="10" onChange={e => updateText(e.target.value)}></textarea>
-        <input type="submit" value="Create Post"/>
+        <textarea name="text" id="text" cols="30" rows="10" onChange={e => updateText(e.target.value)} value={text}></textarea>
+        <input type="submit" value="Create Post" />
       </form>
     </main>
   );
