@@ -21,18 +21,36 @@ function App() {
     apiCall()
   }, [])
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const data = await axios.post("https://api.airtable.com/v0/appFhr7txjsns0HMI/Table%201", {
+      fields: {
+        title: title,
+        author: author,
+        text: text
+      }
+    }, {
+      headers: {
+        'Authorization': `Bearer ${process.env.REACT_APP_AIRTABLE_KEY}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    console.log(data);
+  }
+
   return (
     <main>
       <h1>My Blog</h1>
       {blogPosts.map(post => <Post post={post} key={post.id} />)}
       <h2>New Blog Post</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="author">Author</label>
         <input type="text" id="author" onChange={e => updateAuthor(e.target.value)} />
         <label htmlFor="title">Title</label>
         <input type="text" id="title" onChange={e => updateTitle(e.target.value)}/>
         <label htmlFor="text">Text</label>
-        <textarea name="" id="text" cols="30" rows="10" onChange={e => updateText(e.target.value)}></textarea>
+        <textarea name="text" id="text" cols="30" rows="10" onChange={e => updateText(e.target.value)}></textarea>
+        <input type="submit" value="Create Post"/>
       </form>
     </main>
   );
